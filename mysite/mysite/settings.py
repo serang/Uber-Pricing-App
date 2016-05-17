@@ -27,10 +27,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Variables
+UBER_SERVER_TOKEN='IUjVXyf4Hu1ZkDgirOI9xJy-X9rCpwOvbwWsSpJy'
+UBER_URL='https://api.uber.com/v1/estimates/price'
+ 
+# put your own credentials here 
+TWILIO_ACCOUNT_SID = "AC06e1e5044efc68a5ffd771cb7b15a9d7" 
+TWILIO_AUTH_TOKEN = "03041fc0e3a2d1b485c41202cd6b03fb" 
+TWILIO_PHONE_NUMBER = "+16697211250"
+
 
 # Application definition
 
 INSTALLED_APPS = (
+    'uber_pricing',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,8 +86,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dei51f11rrrghc',
+        'USER': 'bdftyuwjuvsfhr',
+        'PASSWORD': 'ae5Ngl3yYIrM6im7-RnfmvgWJG',
+        'HOST':'ec2-54-243-249-159.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
