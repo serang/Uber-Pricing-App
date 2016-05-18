@@ -7,10 +7,15 @@ import geocoder
 import uuid
 from datetime import datetime
 from django.http import JsonResponse
-from uber_pricing.models import RequestRecord
+from uber_pricing.models import RequestRecords
 from twilio.rest import TwilioRestClient 
 from mysite import settings
-
+from rest_framework.decorators import api_view
+from two1 import bitrequests
+from two1 import blockchain
+from two1 import wallet
+from two1.bitserv.django import payment
+from django.core.exceptions import ValidationError
 
 UBER_SERVER_TOKEN=settings.UBER_SERVER_TOKEN
 UBER_URL=settings.UBER_URL
@@ -25,13 +30,12 @@ logger = logging.getLogger(__name__)
 def validate_buy_params(request):
     try:
         phone_number = request.data['phone_number']
-        len(phone_number) == 10
     except ValueError:
         logger.info('ValueError for buy params: {}'.format(request.data))
-         raise ValidationError({"error_message": "Phone number must be 10 digits long"})
+        raise ValidationError({"error_message": "Phone number must be 10 digits long"})
     try:
         current_address = request.data['current_address']
-        geocoded.latlng = geocoder.google(current_address)
+        latitude, longitude = geocoder.google(current_address).latlng
     except ValueError:
         logger.info('ValueError for buy params: {}'.format(request.data))
         raise ValidationError({"error_message": "Must submit valid address"})
@@ -41,7 +45,6 @@ def validate_buy_params(request):
     except ValueError:
         logger.info('ValueError for buy params: {}'.format(request.data))
         raise ValidationError({"error_message": "Surge multiplier must be >= 1"})
-
     return phone_number, current_address, surge_threshold
 
 def call_uber_api(current_address):
@@ -59,10 +62,10 @@ def call_uber_api(current_address):
 	return uberX_multiplier
 
 def text_user(phone_number, current_surge_multiplier, surge_threshold):
-	client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-	formatted_number = "+1{}".format(str(phone_number)) 
- 	client.messages.create(to=formatted_number, from_=TWILIO_PHONE_NUMBER,
- 	body="This is an auto-generated from SurgeProtector! The current surge multiplier for uberX is {0} which is below your specified surge threshold of {1}. Have a nice day!".format(str(current_surge_multiplier), str(surge_threshold))) 
+    client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    formatted_number = "+1{}".format(str(phone_number)) 
+    client.messages.create(to=formatted_number, from_=TWILIO_PHONE_NUMBER,
+    body="This is an auto-generated from SurgeProtector! The current surge multiplier for uberX is {0} which is below your specified surge threshold of {1}. Have a nice day!".format(str(current_surge_multiplier), str(surge_threshold))) 
 
 @api_view(['POST'])
 @payment.required(1000)
@@ -73,17 +76,17 @@ def buy_readings(request):
         return JsonResponse(error.message_dict, status=400)
     current_surge_multiplier = call_uber_api(current_address)
     if current_surge_multiplier <= surge_threshold:
-    	text_user(phone_number, current_surge_multiplier, surge_threshold)
-    	return JsonResponse({"message": "Thank you for your business! We will alert your phone when surge has dropped below your threshold. Have a nice day!", "current_surge_multiplier": current_surge_multiplier})
-    current_request = RequestRecord(
-    	last_time_checked = datetime.now(),
-    	phone_number = phone_number,
-    	last_surge_multiplier = current_surge_multiplier,
-    	surge_threshold = surge_threshold,
-    	contacted = False
+        text_user(phone_number, current_surge_multiplier, surge_threshold)
+        return JsonResponse({"message": "Thank you for your business! We will alert your phone when surge has dropped below your threshold. Have a nice day!", "current_surge_multiplier": current_surge_multiplier})
+    current_request = RequestRecords(
+        last_time_checked = datetime.now(),
+        phone_number = phone_number,
+        last_surge_multiplier = current_surge_multiplier,
+        surge_threshold = surge_threshold,
+        contacted = False,
         current_address = current_address)
-  	current_request.save()
-  	return JsonResponse({"message": "Thank you for your business! We will alert your phone when surge has dropped below your threshold. Have a nice day!", "current_surge_multiplier": current_surge_multiplier})
+    current_request.save()
+    return JsonResponse({"message": "Thank you for your business! We will alert your phone when surge has dropped below your threshold. Have a nice day!", "current_surge_multiplier": current_surge_multiplier})
 	
 
 

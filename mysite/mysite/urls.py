@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^uber_pricing/', include('uber_pricing.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^payments/', include('two1.bitserv.django.urls')),
 ]

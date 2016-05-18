@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
-
+from two1.wallet import Wallet
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -37,9 +37,14 @@ TWILIO_AUTH_TOKEN = "03041fc0e3a2d1b485c41202cd6b03fb"
 TWILIO_PHONE_NUMBER = "+16697211250"
 
 
+WALLET = Wallet()
+
+APPEND_SLASH = False
+
 # Application definition
 
 INSTALLED_APPS = (
+    'two1.bitserv.django',
     'uber_pricing',
     'django.contrib.admin',
     'django.contrib.auth',
