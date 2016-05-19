@@ -64,7 +64,7 @@ def text_user(phone_number, current_surge_multiplier, surge_threshold):
     client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
     formatted_number = "+1{}".format(str(phone_number)) 
     client.messages.create(to=formatted_number, from_=TWILIO_PHONE_NUMBER,
-    body="This is an auto-generated from SurgeProtector! The current surge multiplier for uberX is {0} which is below your specified surge threshold of {1}. Have a nice day!".format(str(current_surge_multiplier), str(surge_threshold))) 
+    body="This is an auto-generated message from SurgeProtector21! The current surge multiplier for uberX is {0} which is below your specified surge threshold of {1}. Have a nice day!".format(str(current_surge_multiplier), str(surge_threshold))) 
 
 @api_view(['POST'])
 @payment.required(1000)
