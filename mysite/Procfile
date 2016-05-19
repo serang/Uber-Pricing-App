@@ -1,2 +1,2 @@
-web: gunicorn uber_pricing.wsgi --worker-class gevent --log-level=info --log-file -
+web: gunicorn mysite.wsgi --worker-class gevent --log-level=info --log-file -
 uber_pricing: python3 manage.py daemon

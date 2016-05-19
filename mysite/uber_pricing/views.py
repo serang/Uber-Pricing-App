@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 # Create your views here.
 import logging
 import requests
@@ -9,7 +8,7 @@ from datetime import datetime
 from django.http import JsonResponse
 from uber_pricing.models import RequestRecords
 from twilio.rest import TwilioRestClient 
-from mysite import settings
+from uber_pricing import settings
 from rest_framework.decorators import api_view
 from two1 import bitrequests
 from two1 import blockchain

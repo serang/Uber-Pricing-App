@@ -49,8 +49,6 @@ def do_work(work_queue):
 def aggregate():
     requests = RequestRecords.objects.all().filter(contacted=False)
     work_queue = queue.Queue()
-
-    # list of dictionaries containing key-value pairs ready for Django model creation
     outputs = []
     for request in requests:
         work_queue.put_nowait(request)
