@@ -25,7 +25,7 @@ cycler==0.10.0
 decorator==4.0.9
 defusedxml==0.4.1
 dj-database-url==0.3.0
-Django==1.8.3
+Django==1.11.28
 django-admin-bootstrapped==2.5.6
 django-appconf==1.0.1
 django-braces==1.8.1
