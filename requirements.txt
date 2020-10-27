@@ -20,7 +20,7 @@ Collectfast==0.2.3
 contextlib2==0.5.1
 cookies==2.2.1
 coverage==4.0.3
-cryptography==1.2.2
+cryptography==3.2
 cycler==0.10.0
 decorator==4.0.9
 defusedxml==0.4.1
