@@ -1,4 +1,4 @@
-aiohttp==0.17.3
+aiohttp==3.7.4
 APScheduler==3.1.0
 arrow==0.7.0
 auxlib==0.0.36
