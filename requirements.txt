@@ -45,7 +45,7 @@ django-sslify==0.2.7
 django-storages==1.1.8
 django-storages-redux==1.2.3
 django-stronghold==0.2.7
-djangorestframework==3.2.3
+djangorestframework==3.11.2
 docker-py==1.8.0
 docutils==0.12
 EasyProcess==0.2.1
