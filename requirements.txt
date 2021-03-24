@@ -151,7 +151,7 @@ requests==2.10.0
 requests-futures==0.9.5
 requests-oauthlib==0.5.0
 responses==0.5.1
-rsa==3.3
+rsa==4.1
 s3transfer==0.0.1
 sha256==0.1
 -e git://github.com/soylentme/shipwire-python.git@a8afc146424eb3e820d04f54c6fad7c210c108f2#egg=shipwire
