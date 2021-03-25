@@ -142,7 +142,7 @@ python-social-auth==0.2.12
 python3-openid==3.0.7
 pytz==2016.3
 PyVirtualDisplay==0.1.5
-PyYAML==3.11
+PyYAML==5.4
 pyzmq==15.2.0
 qtconsole==4.1.1
 ratelim==0.1.6
