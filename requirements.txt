@@ -122,7 +122,7 @@ pycosat==0.6.1
 pycparser==2.14
 pycrypto==2.6.1
 pyflakes==0.8.1
-Pygments==2.0.2
+Pygments==2.7.4
 pyjade==3.1.0
 PyJWT==1.4.0
 pynder==0.0.11
