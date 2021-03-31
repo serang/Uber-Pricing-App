@@ -82,7 +82,7 @@ jsonschema==2.5.1
 kombu==3.0.33
 libsass==0.8.3
 lockfile==0.12.2
-lxml==3.4.4
+lxml==4.6.3
 Markdown==2.6.2
 MarkupSafe==0.23
 mccabe==0.3.1
