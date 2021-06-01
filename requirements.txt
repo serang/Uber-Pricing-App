@@ -170,7 +170,7 @@ twilio==5.4.0
 two1==3.2.3
 tzlocal==1.2.2
 uritemplate==0.6
-urllib3==1.14
+urllib3==1.26.5
 virtualenv==13.1.2
 websocket-client==0.37.0
 Werkzeug==0.11.9
