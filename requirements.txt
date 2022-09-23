@@ -110,7 +110,7 @@ pep8==1.5.7
 pexpect==3.3
 pickleshare==0.5
 pika==0.10.0
-protobuf==3.0.0a3
+protobuf==3.18.3
 psutil==4.1.0
 psycopg2==2.6.1
 ptyprocess==0.5
